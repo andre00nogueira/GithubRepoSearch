@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         editTextQuery = findViewById(R.id.editTextQuery)
         buttonSearch = findViewById(R.id.buttonSearch)
-        textViewResponse = findViewById(R.id.textViewResponse)
+        //textViewResponse = findViewById(R.id.te)
         textViewTotalCount = findViewById(R.id.textViewTotalCount)
         buttonSearch.setOnClickListener {
             githubSearchQuery()
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     inner class GithubSearchAsync : AsyncTask<URL, Void, String>() {
         override fun onPreExecute() {
             super.onPreExecute()
-            textViewResponse.text = "Your response will appear here"
+            //textViewResponse.text = "Your response will appear here"
         }
 
         override fun doInBackground(vararg p0: URL?): String {
