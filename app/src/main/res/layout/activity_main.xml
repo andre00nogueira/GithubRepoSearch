@@ -23,11 +23,12 @@
             android:text="Search"/>
 
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textViewTotalCount"/>
-    <TextView
-            android:id="@+id/textViewResponse"
+            android:id="@+id/textViewTotalCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"/>
+            tools:text="Total Counts: "/>
+    <ScrollView
+            android:id="@+id/scrollViewRepositories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 </LinearLayout>

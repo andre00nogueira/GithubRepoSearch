@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GithubRepoSearch</string>
+    <string name="total_counts">Total repositories: </string>
 </resources>

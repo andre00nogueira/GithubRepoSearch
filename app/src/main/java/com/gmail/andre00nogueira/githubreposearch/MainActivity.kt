@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
 
 
     fun returnResponseFromJSONObject(jsonString: String){
-        val response: JSONObject = JSONObject(jsonString)
+        val response = JSONObject(jsonString)
         val githubTotalSearchResults = response.get("total_count")
-        textViewTotalCount.text = githubTotalSearchResults.toString()
+        textViewTotalCount.text = getString(R.string.total_counts) + githubTotalSearchResults.toString()
         val githubArray: JSONArray = response.getJSONArray("items")
         for (i in 0..(githubArray.length() - 1)) {
             val githubRepoItem: JSONObject = githubArray.getJSONObject(i)
