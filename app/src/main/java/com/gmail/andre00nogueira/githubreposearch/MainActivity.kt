@@ -3,9 +3,13 @@ package com.gmail.andre00nogueira.githubreposearch
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
@@ -15,20 +19,31 @@ class MainActivity : AppCompatActivity() {
 
     protected lateinit var editTextQuery: EditText
     protected lateinit var buttonSearch: Button
-    protected lateinit var textViewResponse: TextView
     protected lateinit var textViewTotalCount: TextView
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mRepositoriesAdapter: RepositoriesAdapter
+    private lateinit var repoNames: ArrayList<String>
+    private lateinit var repoCreatorNames: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mRecyclerView = findViewById(R.id.recyclerViewRepo) // This is the recyclerView that will contain the data
 
         editTextQuery = findViewById(R.id.editTextQuery)
         buttonSearch = findViewById(R.id.buttonSearch)
-        //textViewResponse = findViewById(R.id.te)
         textViewTotalCount = findViewById(R.id.textViewTotalCount)
         buttonSearch.setOnClickListener {
             githubSearchQuery()
         }
+
+        repoCreatorNames = ArrayList()
+        repoNames = ArrayList()
+
+        val layoutManager: LinearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        mRecyclerView.layoutManager = layoutManager
+        mRecyclerView.setHasFixedSize(true)
+
     }
 
 
@@ -67,12 +82,20 @@ class MainActivity : AppCompatActivity() {
         val githubTotalSearchResults = response.get("total_count")
         textViewTotalCount.text = getString(R.string.total_counts) + githubTotalSearchResults.toString()
         val githubArray: JSONArray = response.getJSONArray("items")
+
         for (i in 0..(githubArray.length() - 1)) {
             val githubRepoItem: JSONObject = githubArray.getJSONObject(i)
             val githubRepoId = githubRepoItem.get("id")
             val githubRepoFullName = githubRepoItem.get("full_name")
             val githubOwner: JSONObject = githubRepoItem.getJSONObject("owner")
             val githubOwnerName = githubOwner.get("login")
+            repoNames.add(githubRepoFullName.toString())
+            repoCreatorNames.add(githubOwnerName.toString())
         }
+        
+        mRepositoriesAdapter = RepositoriesAdapter(repoNames, repoCreatorNames)
+        mRecyclerView.adapter = mRepositoriesAdapter
+        editTextQuery.visibility = View.GONE
+        buttonSearch.visibility = View.GONE
     }
 }

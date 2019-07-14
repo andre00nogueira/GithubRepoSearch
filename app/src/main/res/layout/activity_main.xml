@@ -26,9 +26,13 @@
             android:id="@+id/textViewTotalCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             tools:text="Total Counts: "/>
-    <ScrollView
-            android:id="@+id/scrollViewRepositories"
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewRepo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
