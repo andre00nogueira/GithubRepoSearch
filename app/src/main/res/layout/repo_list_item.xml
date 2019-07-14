@@ -3,8 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="32dp"
-              android:padding="8dp">
+              android:layout_marginTop="32dp">
     <TextView
             android:id="@+id/textViewRepoName"
             android:layout_width="wrap_content"
@@ -16,10 +15,17 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
+    <ImageView
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="100dp"
+            android:layout_height="100dp" android:id="@+id/imageViewProfilePic"
+    />
+
     <View android:layout_width="match_parent"
           android:layout_height="1dp"
           android:background="#000"
-          android:paddingBottom="8dp">
+          android:paddingBottom="8dp"
+          android:paddingTop="8dp">
 
     </View>
 

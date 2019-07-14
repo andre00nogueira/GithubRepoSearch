@@ -13,14 +13,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:hint="Insert the github repository name here"/>
+            android:hint="@string/insert_the_github_repository_name_here"/>
 
     <Button
             android:id="@+id/buttonSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Search"/>
+            android:text="@string/search"/>
 
     <TextView
             android:id="@+id/textViewTotalCount"
@@ -29,6 +29,10 @@
             android:textSize="16sp"
             tools:text="Total Counts: "/>
 
+    <Button
+            android:text="@string/search_new_repositories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/buttonSearchNewRepos"/>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRepo"
             android:layout_width="match_parent"

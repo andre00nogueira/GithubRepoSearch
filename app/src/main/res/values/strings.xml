@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GithubRepoSearch</string>
     <string name="total_counts">Total repositories: </string>
+    <string name="search_new_repositories">Search new repositories</string>
+    <string name="insert_the_github_repository_name_here">Insert the github repository name here</string>
+    <string name="search">Search</string>
 </resources>
