@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -140,5 +142,18 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         mSearchNewRepositories.visibility = View.VISIBLE // Sets the visibility of the new search button to visible
         mTotalCount.visibility = View.VISIBLE
         mLanguageUsed.visibility = View.GONE // Sets the visibility of the EditText to GONE
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.itemRefresh){
+            githubSearchQuery()
+            Toast.makeText(this, "Refreshed results!", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
