@@ -10,7 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.net.URL
 
-class RepositoriesAdapter(val repoNames:ArrayList<String>, val repoCreatorNames: ArrayList<String>, val profilePic: URL): RecyclerView.Adapter<RepositoriesAdapter.RepositoriesAdapterViewHolder>() {
+class RepositoriesAdapter(val repoNames:ArrayList<String>, val repoCreatorNames: ArrayList<String>, clickHandler: RepositoriesAdapterOnClickHandler): RecyclerView.Adapter<RepositoriesAdapter.RepositoriesAdapterViewHolder>() {
+
+    private var mClickHandler: RepositoriesAdapterOnClickHandler = clickHandler
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesAdapterViewHolder {
         val context: Context = parent.context // Gets the context of MainActivity
@@ -28,7 +33,19 @@ class RepositoriesAdapter(val repoNames:ArrayList<String>, val repoCreatorNames:
 
     }
 
-    inner class RepositoriesAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    interface RepositoriesAdapterOnClickHandler{
+        fun onClick(urlToOpen: String)
+
+    }
+
+    inner class RepositoriesAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
+
+
+        override fun onClick(p0: View?) {
+            val adapterPosition = adapterPosition
+            mClickHandler.onClick("https://github.com/"+repoNames[adapterPosition])
+        }
+        val sSetOnItemClickListener = itemView.setOnClickListener(this)
         val mTextViewRepoCreatorName : TextView = itemView.findViewById(R.id.textViewRepoCreatorName)
         val mTextViewRepoName: TextView = itemView.findViewById(R.id.textViewRepoName)
         val mImageViewProfilePic: ImageView = itemView.findViewById(R.id.imageViewProfilePic)

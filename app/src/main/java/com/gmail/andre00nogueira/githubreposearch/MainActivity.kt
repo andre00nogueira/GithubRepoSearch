@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
@@ -14,7 +15,10 @@ import org.json.JSONObject
 import java.io.IOException
 import java.net.URL
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler {
+    override fun onClick(urlToOpen: String) {
+        Toast.makeText(this, urlToOpen, Toast.LENGTH_SHORT).show()
+    }
 
     private lateinit var mRepositoryName: EditText
     private lateinit var mSearch: Button
@@ -112,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             repoCreatorNames.add(githubOwnerName.toString()) // Adds element to ArrayList
         }
         
-        mRepositoriesAdapter = RepositoriesAdapter(repoNames, repoCreatorNames, githubOwnerProfilePic) // Passes the values to the RecyclerView adapter
+        mRepositoriesAdapter = RepositoriesAdapter(repoNames, repoCreatorNames, this) // Passes the values to the RecyclerView adapter
         mRecyclerView.adapter = mRepositoriesAdapter // Sets the adapter of the RecyclerView to the new adapter created above
         mRecyclerView.visibility = View.VISIBLE // Sets the visibility of the RecyclerView to visible
         mRepositoryName.visibility = View.GONE // Sets the visibility of the EditText to GONE
