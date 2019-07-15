@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
     private lateinit var repoCreatorNames: ArrayList<String>
     private lateinit var mSearchNewRepositories: Button
     private lateinit var githubOwnerProfilePic: Any
+    private lateinit var mLanguageUsed: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         mRepositoryName = findViewById(R.id.editTextQuery)
         mSearch = findViewById(R.id.buttonSearch)
         mTotalCount = findViewById(R.id.textViewTotalCount)
-
+        mLanguageUsed = findViewById(R.id.editTextLanguage)
 
         repoCreatorNames = ArrayList() // Init repoCreatorNames with an empty ArrayList
         repoNames = ArrayList()// Init repoNames with an empty ArrayList
@@ -74,6 +75,9 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
             mRepositoryName.visibility = View.VISIBLE // Makes editText visible again
             mSearch.visibility = View.VISIBLE // Makes button to search visible again
             mTotalCount.visibility = View.GONE
+            mLanguageUsed.visibility = View.VISIBLE // Makes editText visible again
+            repoNames.clear() // Clear previous data
+            repoCreatorNames.clear() // Clear previous data
         }
 
     }
@@ -81,7 +85,8 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
 
     fun githubSearchQuery() {
         val githubSearchQuery: String = mRepositoryName.text.toString() // Gets the name of the repository
-        val url: URL = NetworkUtils.buildURL(githubSearchQuery) // Builds the URL
+        val githubLanguageUsed: String = mLanguageUsed.text.toString() // Gets the language used in the repository
+        val url: URL = NetworkUtils.buildURL(githubSearchQuery, githubLanguageUsed) // Builds the URL
         GithubSearchAsync().execute(url) // And then executes it in the AsyncTask
     }
 
@@ -132,5 +137,6 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         mSearch.visibility = View.GONE // Sets the visibility of the Search button to GONE
         mSearchNewRepositories.visibility = View.VISIBLE // Sets the visibility of the new search button to visible
         mTotalCount.visibility = View.VISIBLE
+        mLanguageUsed.visibility = View.GONE // Sets the visibility of the EditText to GONE
     }
 }

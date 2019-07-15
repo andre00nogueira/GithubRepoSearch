@@ -15,6 +15,12 @@
             android:textSize="22sp"
             android:hint="@string/insert_the_github_repository_name_here"/>
 
+    <EditText
+            android:id="@+id/editTextLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:hint="Insert the language used here (optional)"/>
     <Button
             android:id="@+id/buttonSearch"
             android:layout_width="match_parent"
