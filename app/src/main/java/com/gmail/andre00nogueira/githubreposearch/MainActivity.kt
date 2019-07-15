@@ -21,9 +21,11 @@ import java.net.URL
 class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler {
 
     override fun onClick(urlToOpen: String) {
-       val uri: Uri = Uri.parse(urlToOpen)
-       val intent = Intent(Intent.ACTION_VIEW, uri)
-       startActivity(intent)
+       val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlToOpen)) // Open the URL
+        // Checks if there are any apps installed that can open the URL
+       if (intent.resolveActivity(packageManager)!=null){
+            startActivity(intent)
+        }
     }
 
     private lateinit var mRepositoryName: EditText
