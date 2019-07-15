@@ -48,7 +48,7 @@ class RepositoriesAdapter(val repoNames:ArrayList<String>, val repoCreatorNames:
         val sSetOnItemClickListener = itemView.setOnClickListener(this)
         val mTextViewRepoCreatorName : TextView = itemView.findViewById(R.id.textViewRepoCreatorName)
         val mTextViewRepoName: TextView = itemView.findViewById(R.id.textViewRepoName)
-        val mImageViewProfilePic: ImageView = itemView.findViewById(R.id.imageViewProfilePic)
+      //  val mImageViewProfilePic: ImageView = itemView.findViewById(R.id.imageViewProfilePic)
     }
 
 

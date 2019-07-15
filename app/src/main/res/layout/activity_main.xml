@@ -10,39 +10,53 @@
 
     <EditText
             android:id="@+id/editTextQuery"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:hint="@string/insert_the_github_repository_name_here"/>
+            android:hint="@string/insert_the_github_repository_name_here" android:layout_margin="16dp"/>
 
     <EditText
             android:id="@+id/editTextLanguage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="22sp"
-            android:hint="Insert the language used here (optional)"/>
+            android:hint="Insert the language used here (optional)" android:layout_margin="16dp"/>
     <Button
             android:id="@+id/buttonSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="@string/search"/>
+            android:text="@string/search" android:layout_margin="16dp"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000">
+
+    </View>
+
 
     <TextView
             android:id="@+id/textViewTotalCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            tools:text="Total Counts: "/>
+
+            tools:text="Total Counts: " android:layout_margin="16dp"/>
 
     <Button
             android:text="@string/search_new_repositories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/buttonSearchNewRepos"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSearchNewRepos"
+            android:layout_margin="16dp"
+            tools:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRepo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:visibility="gone">
     </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

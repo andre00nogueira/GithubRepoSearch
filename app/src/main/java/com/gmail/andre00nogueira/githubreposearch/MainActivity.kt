@@ -73,9 +73,11 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
             mSearchNewRepositories.visibility = View.GONE // Makes this button GONE
             mRecyclerView.visibility = View.GONE // Makes the current recycler view GONE
             mRepositoryName.visibility = View.VISIBLE // Makes editText visible again
+            mRepositoryName.setText("") // Sets empty text
             mSearch.visibility = View.VISIBLE // Makes button to search visible again
             mTotalCount.visibility = View.GONE
             mLanguageUsed.visibility = View.VISIBLE // Makes editText visible again
+            mLanguageUsed.setText("") // Sets empty text
             repoNames.clear() // Clear previous data
             repoCreatorNames.clear() // Clear previous data
         }
