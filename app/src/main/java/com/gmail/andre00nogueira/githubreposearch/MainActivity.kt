@@ -1,5 +1,7 @@
 package com.gmail.andre00nogueira.githubreposearch
 
+import android.content.Intent
+import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.net.URI
 import java.net.URL
 
 class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler {
+
     override fun onClick(urlToOpen: String) {
-        Toast.makeText(this, urlToOpen, Toast.LENGTH_SHORT).show()
+       val uri: Uri = Uri.parse(urlToOpen)
+       val intent = Intent(Intent.ACTION_VIEW, uri)
+       startActivity(intent)
     }
 
     private lateinit var mRepositoryName: EditText
@@ -47,7 +53,7 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
 
 
         mSearchNewRepositories.visibility = View.GONE // When app is started, make button GONE
-
+        mTotalCount.visibility = View.GONE
         // When search button is pressed...
         mSearch.setOnClickListener {
             githubSearchQuery() // Makes the new search query
@@ -65,6 +71,7 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
             mRecyclerView.visibility = View.GONE // Makes the current recycler view GONE
             mRepositoryName.visibility = View.VISIBLE // Makes editText visible again
             mSearch.visibility = View.VISIBLE // Makes button to search visible again
+            mTotalCount.visibility = View.GONE
         }
 
     }
@@ -122,5 +129,6 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         mRepositoryName.visibility = View.GONE // Sets the visibility of the EditText to GONE
         mSearch.visibility = View.GONE // Sets the visibility of the Search button to GONE
         mSearchNewRepositories.visibility = View.VISIBLE // Sets the visibility of the new search button to visible
+        mTotalCount.visibility = View.VISIBLE
     }
 }
