@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.preference.PreferenceFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,15 @@ import java.io.IOException
 import java.net.URI
 import java.net.URL
 
-class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler {
+class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler, SharedPreferences.OnSharedPreferenceChangeListener {
+
+
+    // THIS FUNCTION WILL BE USED FOR CHANGING UI BASED ON SHARED PREFERENCES !!!
+    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+        if  (p1.equals("open_url_when_clicked")){
+            // code to execute about shared preferences
+        }
+    }
 
     override fun onClick(urlToOpen: String) {
         if(!isOpenURLAllowed()){
@@ -88,11 +97,6 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
             repoNames.clear() // Clear previous data
             repoCreatorNames.clear() // Clear previous data
         }
-
-    }
-
-    fun setupDataFromSharedPreferences(){
-
 
     }
 
