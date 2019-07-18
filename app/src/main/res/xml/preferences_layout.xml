@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="Open url when an repo is clicked" android:key="open_url_when_clicked"
+            android:summaryOn="Yes" android:summaryOff="No" android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</PreferenceScreen>

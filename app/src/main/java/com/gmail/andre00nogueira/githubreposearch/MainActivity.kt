@@ -1,6 +1,7 @@
 package com.gmail.andre00nogueira.githubreposearch
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
@@ -23,6 +25,9 @@ import java.net.URL
 class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapterOnClickHandler {
 
     override fun onClick(urlToOpen: String) {
+        if(!isOpenURLAllowed()){
+            return
+        }
        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlToOpen)) // Open the URL
         // Checks if there are any apps installed that can open the URL
        if (intent.resolveActivity(packageManager)!=null){
@@ -86,7 +91,22 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
 
     }
 
+    fun setupDataFromSharedPreferences(){
 
+
+    }
+
+    fun isOpenURLAllowed() : Boolean{
+        val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        return sharedPreferences.getBoolean("open_url_when_clicked", true)
+    }
+
+    // Here all starts
+        // In this function we start the HTTP request
+        // We get the repo name and the language used
+        // And we pass it to the buildURL function in NetworkUtils class
+            // which returns a URL, and then we pass that url to the AsyncTask
+            // This AsyncTask will get the actual data from the internet
     fun githubSearchQuery() {
         val githubSearchQuery: String = mRepositoryName.text.toString() // Gets the name of the repository
         val githubLanguageUsed: String = mLanguageUsed.text.toString() // Gets the language used in the repository
@@ -94,6 +114,18 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         GithubSearchAsync().execute(url) // And then executes it in the AsyncTask
     }
 
+
+    // This is the AsyncTask
+        // Here we make the internet connection, since we can't make it in the main UI
+        // Async classes have 4 methods that we can override
+            // onPreExecute
+                // Here we make changes that we want to happen BEFORE the AsyncTask runs
+            // doInBackground
+                // Here are the things that the AsyncTask is doing in the background (retrieving the data from HTTP request)
+            // onProgressUpdate
+                // Here we can update the main UI with the changes that are currently being made in doInBackground
+            // onPostExecute
+                // Here we can interact with the main UI, AFTER the AsyncTask ended
     inner class GithubSearchAsync : AsyncTask<URL, Void, String>() {
 
         override fun doInBackground(vararg p0: URL?): String {
@@ -106,6 +138,7 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
             }
             return githubSearchResults!! // Returns null or the JSON response
         }
+
 
         override fun onPostExecute(result: String) {
             super.onPostExecute(result)
@@ -153,6 +186,11 @@ class MainActivity : AppCompatActivity(), RepositoriesAdapter.RepositoriesAdapte
         if (item.itemId == R.id.itemRefresh){
             githubSearchQuery()
             Toast.makeText(this, "Refreshed results!", Toast.LENGTH_SHORT).show()
+        }
+        // When the item menu pressed is the "settings"...
+        if (item.itemId == R.id.itemSettings){
+            // Opens the settings activity which will display the fragment w/ the preferences
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
